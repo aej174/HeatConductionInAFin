@@ -13,6 +13,8 @@
 		223B31D21B027B11005DFD3E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 223B31D11B027B11005DFD3E /* Images.xcassets */; };
 		223B31D51B027B11005DFD3E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 223B31D31B027B11005DFD3E /* LaunchScreen.xib */; };
 		223B31E11B027B11005DFD3E /* HeatConductionInAFinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223B31E01B027B11005DFD3E /* HeatConductionInAFinTests.swift */; };
+		223B31EB1B0284B3005DFD3E /* Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223B31EA1B0284B3005DFD3E /* Segment.swift */; };
+		22E4254F1B0F6E50009A8D7C /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E4254E1B0F6E50009A8D7C /* ProfileCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		223B31DA1B027B11005DFD3E /* HeatConductionInAFinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeatConductionInAFinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		223B31DF1B027B11005DFD3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		223B31E01B027B11005DFD3E /* HeatConductionInAFinTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatConductionInAFinTests.swift; sourceTree = "<group>"; };
+		223B31EA1B0284B3005DFD3E /* Segment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segment.swift; sourceTree = "<group>"; };
+		22E4254E1B0F6E50009A8D7C /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +83,9 @@
 			children = (
 				223B31CA1B027B11005DFD3E /* AppDelegate.swift */,
 				223B31CC1B027B11005DFD3E /* ViewController.swift */,
+				223B31EA1B0284B3005DFD3E /* Segment.swift */,
 				223B31CE1B027B11005DFD3E /* Main.storyboard */,
+				22E4254E1B0F6E50009A8D7C /* ProfileCell.swift */,
 				223B31D11B027B11005DFD3E /* Images.xcassets */,
 				223B31D31B027B11005DFD3E /* LaunchScreen.xib */,
 				223B31C81B027B11005DFD3E /* Supporting Files */,
@@ -213,6 +219,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				223B31CD1B027B11005DFD3E /* ViewController.swift in Sources */,
+				22E4254F1B0F6E50009A8D7C /* ProfileCell.swift in Sources */,
+				223B31EB1B0284B3005DFD3E /* Segment.swift in Sources */,
 				223B31CB1B027B11005DFD3E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,6 +415,7 @@
 				223B31E61B027B11005DFD3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		223B31E71B027B11005DFD3E /* Build configuration list for PBXNativeTarget "HeatConductionInAFinTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +424,7 @@
 				223B31E91B027B11005DFD3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
