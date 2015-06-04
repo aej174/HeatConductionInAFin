@@ -10,14 +10,15 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet weak var sourceTemperatureTextField: UITextField!
-    @IBOutlet weak var ambientTemperatureTextField: UITextField!
-    @IBOutlet weak var heatTransferCoefficientTextField: UITextField!
-    @IBOutlet weak var thermalConductivityTextField: UITextField!
-    @IBOutlet weak var finHeightTextField: UITextField!
-    @IBOutlet weak var finThicknessTextField: UITextField!
-    @IBOutlet weak var heatTransferRateTextField: UITextField!       
-    @IBOutlet weak var finEfficiencyTextField: UITextField!
+                                                                               // Sample Input:
+    @IBOutlet weak var sourceTemperatureTextField: UITextField!         // 400.0
+    @IBOutlet weak var ambientTemperatureTextField: UITextField!        // 60.0
+    @IBOutlet weak var heatTransferCoefficientTextField: UITextField!   // 10.0
+    @IBOutlet weak var thermalConductivityTextField: UITextField!       // 190.0  (for copper)
+    @IBOutlet weak var finHeightTextField: UITextField!                 // 1.0
+    @IBOutlet weak var finThicknessTextField: UITextField!              // 0.010
+    @IBOutlet weak var heatTransferRateTextField: UITextField!          // for output
+    @IBOutlet weak var finEfficiencyTextField: UITextField!             // for output
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -47,11 +48,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // Build dictionaries for initial table entries
         
-        for var i = 0; i < numberOfSegments; ++i {
-            segments[i].index = i
-            segments[i].temperature = temperatures[i]
-            println("i = \(segments[i].index), Temperature = \(segments[i].temperature)")
-            self.profileValues.append(["index" : "\(segments[i].index)", "segmentTemp" : "\(segments[i].temperature)"])
+        for var j = 0; j < numberOfSegments; ++j {
+            segments[j].index = j
+            segments[j].temperature = temperatures[j]
+            
+            //println("j = \(segments[j].index), Temperature = \(segments[j].temperature)")
+            
+            self.profileValues.append(["index" : "\(segments[j].index)", "segmentTemp" : "\(segments[j].temperature)"])
         }
     }
 
@@ -71,7 +74,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let profileDict:Dictionary = profileValues[indexPath.row]
         var cell: ProfileCell = tableView.dequeueReusableCellWithIdentifier("myCell") as ProfileCell
         println(indexPath.row)
-        cell.segmentNumber.text = profileDict["index"]
+        cell.segmentNumber.text = indexPath.row.description
+        //cell.segmentNumber.text = profileDict["index"]
         cell.segmentTemp.text = profileDict["segmentTemp"]
         return cell
     }
@@ -143,7 +147,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         var heatIn = 2.0 * finThickness * finConductivity * (hotTemperature - temperatures[1]) / deltaX
         var heatOut = 0.0
-              
+        for var i = 1; i < numberOfSegments; ++i {
+            heatOut = heatOut + 2.0 * finCoefficient * deltaX * (temperatures[i] - ambientTemperature)
+        }
         println("Heat In = \(heatIn), BTU/hr-ft")
         println("Heat Out = \(heatOut), BTU/hr-ft")
         
@@ -155,6 +161,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         self.heatTransferRateTextField.text = "\(avgHeat)"
         self.finEfficiencyTextField.text = "\(finEfficiency)"
+        
+        // Update table
+        
+        for var i = 0; i < numberOfSegments; ++i {
+            segments[i].index = i
+            
+            if i == 0 {
+                segments[i].temperature = hotTemperature
+            }
+            else {
+                segments[i].temperature = temperatures[i]
+            }
+            println("i = \(segments[i].index), Temperature = \(segments[i].temperature)")
+            
+            self.profileValues.append(["index" : "\(segments[i].index)", "segmentTemp" : "\(segments[i].temperature)"])
+        }
+        self.tableView.reloadData()
     }
             
     // Thomas Algorithm for solving simultaneous linear equations in a tridiagonal matrix

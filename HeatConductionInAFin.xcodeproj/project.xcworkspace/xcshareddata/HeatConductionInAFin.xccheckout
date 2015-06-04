@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>855A371C-C70A-4050-8DF8-606084AABABA</string>
+	<key>IDESourceControlProjectName</key>
+	<string>HeatConductionInAFin</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5BC4B78A022B4203F01EE975E05AA40259778450</key>
+		<string>https://github.com/aej174/HeatConductionInAFin</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>HeatConductionInAFin.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5BC4B78A022B4203F01EE975E05AA40259778450</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/aej174/HeatConductionInAFin</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5BC4B78A022B4203F01EE975E05AA40259778450</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5BC4B78A022B4203F01EE975E05AA40259778450</string>
+			<key>IDESourceControlWCCName</key>
+			<string>HeatConductionInAFin</string>
+		</dict>
+	</array>
+</dict>
+</plist>

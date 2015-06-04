@@ -12,7 +12,8 @@ class ProfileCell: UITableViewCell {
     
     @IBOutlet weak var segmentNumber: UILabel!    
     @IBOutlet weak var segmentTemp: UILabel!
-
+   
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
