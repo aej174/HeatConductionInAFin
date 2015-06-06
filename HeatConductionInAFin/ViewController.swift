@@ -22,40 +22,37 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var tableView: UITableView!
     
-    let numberOfSegments = 21
+    let numberOfSegments = 91
     
     var segments:[Segment] = []
     
     var segment = Segment()
     
-    var temperatures = [Double](count:21, repeatedValue:100.0)
+    var temperatures = [Double](count: 91, repeatedValue:0.0)
     
-    var profileValues:[Dictionary<String, String>] = []
+    var profileArray:[Dictionary<String, String>] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
         
         //Build segments array
         
         for var i = 0;  i < numberOfSegments; ++i {
             self.segments.append(segment)
-            segment.temperature = 100.0           // initial values for temperature property
+            segment.temperature = 0.0           // initial values for temperature property
             self.temperatures.append(segment.temperature)
         }
         
         // Build dictionaries for initial table entries
         
         for var j = 0; j < numberOfSegments; ++j {
-            segments[j].index = j
             segments[j].temperature = temperatures[j]
             
-            //println("j = \(segments[j].index), Temperature = \(segments[j].temperature)")
-            
-            self.profileValues.append(["index" : "\(segments[j].index)", "segmentTemp" : "\(segments[j].temperature)"])
+            profileArray.append(["segmentNumber":"\(j)", "segmentTemp":"\(segments[j].temperature)"])
         }
+        println("\(profileArray.count) segments in array")
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,11 +68,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let profileDict:Dictionary = profileValues[indexPath.row]
+        let profileDict:Dictionary = profileArray[indexPath.row]
         var cell: ProfileCell = tableView.dequeueReusableCellWithIdentifier("myCell") as ProfileCell
-        println(indexPath.row)
-        cell.segmentNumber.text = indexPath.row.description
-        //cell.segmentNumber.text = profileDict["index"]
+        //println(indexPath.row)
+        cell.segmentNumber.text = profileDict["segmentNumber"]
         cell.segmentTemp.text = profileDict["segmentTemp"]
         return cell
     }
@@ -83,6 +79,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // UITableViewDelegate
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 45.0
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Segment Number      Temperature, F"
     }
 
     // Enter data values and begin calculations
@@ -153,30 +157,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         println("Heat In = \(heatIn), BTU/hr-ft")
         println("Heat Out = \(heatOut), BTU/hr-ft")
         
-        var avgHeat = (heatIn + heatOut) / 2.0
-        println("Avg Heat = \(avgHeat), BTU/hr-ft")
+        let avgHeat = (heatIn + heatOut) / 2.0
+        let yy = Double(round(100 * avgHeat) / 100)
+        println("Avg Heat = \(yy), BTU/hr-ft")
         
-        var finEfficiency = 100.0 * avgHeat / (2.0 * finCoefficient * finHeight * (hotTemperature - ambientTemperature))
-        println("Fin Efficiency = \(finEfficiency) %")
+        let finEfficiency = 100.0 * avgHeat / (2.0 * finCoefficient * finHeight * (hotTemperature - ambientTemperature))
+        let zz = Double(round(100 * finEfficiency) / 100)
+        println("Fin Efficiency = \(zz) %")
         
-        self.heatTransferRateTextField.text = "\(avgHeat)"
-        self.finEfficiencyTextField.text = "\(finEfficiency)"
+        self.heatTransferRateTextField.text = "\(yy)"
+        self.finEfficiencyTextField.text = "\(zz)"
         
         // Update table
         
-        for var i = 0; i < numberOfSegments; ++i {
-            segments[i].index = i
-            
-            if i == 0 {
-                segments[i].temperature = hotTemperature
+        profileArray = []
+        
+        for var j = 0; j < numberOfSegments; ++j {
+            if j == 0 {
+                segments[j].temperature = hotTemperature
             }
             else {
-                segments[i].temperature = temperatures[i]
+                segments[j].temperature = temperatures[j]
             }
-            println("i = \(segments[i].index), Temperature = \(segments[i].temperature)")
             
-            self.profileValues.append(["index" : "\(segments[i].index)", "segmentTemp" : "\(segments[i].temperature)"])
+            var y = Double(round(100 * segments[j].temperature) / 100)
+            println("j = \(j), temperature = \(segments[j].temperature)")
+            profileArray.append(["segmentNumber":"\(j)", "segmentTemp":"\(y)"])
         }
+        println("\(profileArray.count) segments in array")
+
         self.tableView.reloadData()
     }
             
